@@ -3,12 +3,11 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
-use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
-#[ORM\Table(name: '`user`')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
@@ -16,85 +15,62 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column]
     private ?int $id = null;
 
-    #[ORM\Column(length: 180, unique: true)]
-    private ?string $user_id = null;
+    private $email;
 
-    #[ORM\Column]
-    private array $roles = [];
+    private $roles = [];
 
-    /**
-     * @var string The hashed password
-     */
-    #[ORM\Column]
-    private ?string $password = null;
+    private $password;
 
-    public function getId(): ?int
+    private $firstname;
+
+    private $pseudoname;
+
+    private $wishList;
+
+    private $reviews;
+
+    private $cartItems;
+
+    private $addresses;
+
+    private $orders;
+
+    private $contacts;
+
+    private $confirmation;
+
+    private $modifPasswords;
+
+    private $promoCodes;
+
+    public function __construct()
     {
-        return $this->id;
+        $this->reviews = new ArrayCollection();
+        $this->cartItems = new ArrayCollection();
+        $this->addresses = new ArrayCollection();
+        $this->orders = new ArrayCollection();
+        $this->contacts = new ArrayCollection();
+        $this->modifPasswords = new ArrayCollection();
+        $this->promoCodes = new ArrayCollection();
     }
 
-    public function getUserId(): ?string
+    public function getPassword(): ?string
     {
-        return $this->user_id;
+        // TODO: Implement getPassword() method.
     }
 
-    public function setUserId(string $user_id): self
-    {
-        $this->user_id = $user_id;
-
-        return $this;
-    }
-
-    /**
-     * A visual identifier that represents this user.
-     *
-     * @see UserInterface
-     */
-    public function getUserIdentifier(): string
-    {
-        return (string) $this->user_id;
-    }
-
-    /**
-     * @see UserInterface
-     */
     public function getRoles(): array
     {
-        $roles = $this->roles;
-        // guarantee every user at least has ROLE_USER
-        $roles[] = 'ROLE_USER';
-
-        return array_unique($roles);
+        // TODO: Implement getRoles() method.
     }
 
-    public function setRoles(array $roles): self
-    {
-        $this->roles = $roles;
-
-        return $this;
-    }
-
-    /**
-     * @see PasswordAuthenticatedUserInterface
-     */
-    public function getPassword(): string
-    {
-        return $this->password;
-    }
-
-    public function setPassword(string $password): self
-    {
-        $this->password = $password;
-
-        return $this;
-    }
-
-    /**
-     * @see UserInterface
-     */
     public function eraseCredentials()
     {
-        // If you store any temporary, sensitive data on the user, clear it here
-        // $this->plainPassword = null;
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getUserIdentifier(): string
+    {
+        // TODO: Implement getUserIdentifier() method.
     }
 }

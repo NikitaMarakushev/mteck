@@ -27,7 +27,6 @@ RUN if [ ${INSTALL_XDEBUG} = true ]; \
 RUN apt-get update && apt-get install -y --no-install-recommends git wget sudo unzip \
     && rm -rf /var/lib/apt/lists/* \
 
-
 #Application params
 COPY docker/php/conf.d/app.ini $PHP_INI_DIR/conf.d/
 
