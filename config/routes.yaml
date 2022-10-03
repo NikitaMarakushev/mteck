@@ -1,7 +1,11 @@
-controllers:
-    resource: ../src/Controller/
+controller_core:
+    resource: ../src/Core/Infrastructure/Controller/
     type: attribute
 
-product:
-    path: /
-    controller: App\Controller\ProductController::index
+controller_product:
+    resource: ../src/Product/Infrastructure/Controller/
+    type: attribute
+
+controller_users:
+    resource: ../src/User/Infrastructure/Controller/
+    type: attribute

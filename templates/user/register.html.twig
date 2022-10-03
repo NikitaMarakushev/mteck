@@ -1,0 +1,33 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Register{% endblock %}
+
+{% block body %}
+
+<div class="row">
+    <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 col-xxl-4 offset-xxl-4">
+        {% for flashError in app.flashes('verify_email_error') %}
+            <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+        {% endfor %}
+
+        <h4>Регистрация</h4>
+
+        {{ form_start(registrationForm, {'attr': {'class': 'row', 'id': 'registration'}}) }}
+        <div class="col-12">
+            {{ form_row(registrationForm.name) }}
+        </div>
+        <div class="col-12">
+            {{ form_row(registrationForm.email) }}
+        </div>
+        <div class="col-12">
+            {{ form_row(registrationForm.password) }}
+        </div>
+        <div class="col-12">
+            {{ form_row(registrationForm.agreeTerms) }}
+        </div>
+        {{ form_end(registrationForm) }}
+        <button form="registration" name="save-button" class="btn btn-sm btn-primary">Зарегистрироваться</button>
+    </div>
+</div>
+
+{% endblock %}

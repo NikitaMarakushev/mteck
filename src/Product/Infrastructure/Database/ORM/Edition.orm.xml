@@ -1,0 +1,19 @@
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Cards\Domain\Entity\Edition" table="cards_edition" schema="public">
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+            <sequence-generator sequence-name="edition_seq" initial-value="1" />
+        </id>
+
+        <field name="name" column="name" type="text" nullable="false" unique="true" />
+        <field name="code" column="code" type="text" nullable="false" unique="true" />
+        <field name="number" column="number" type="integer" nullable="false" unique="true" />
+        <field name="releaseDate" column="release_date" type="text" nullable="true" />
+
+    </entity>
+</doctrine-mapping>

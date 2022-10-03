@@ -10,11 +10,18 @@ doctrine:
         naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
         auto_mapping: true
         mappings:
-            App:
+            Users:
                 is_bundle: false
-                dir: '%kernel.project_dir%/src/Entity'
-                prefix: 'App\Entity'
-                alias: App
+                type: xml
+                dir: '%kernel.project_dir%/src/User/Infrastructure/Database/ORM'
+                prefix: 'App\User\Domain\Entity'
+                alias: Users
+            Product:
+                is_bundle: false
+                type: xml
+                dir: '%kernel.project_dir%/src/Product/Infrastructure/Database/ORM'
+                prefix: 'App\Product\Domain\Entity'
+                alias: Product
 
 when@test:
     doctrine:
