@@ -1,6 +1,13 @@
 framework:
     messenger:
-        failure_transport: failed
+        default_bus: command.bus
+        buses:
+            command.bus:
+                middleware:
+                    - doctrine_transaction
+            query.bus:
+
+        #failure_transport: failed
 
         transports:
             # https://symfony.com/doc/current/messenger.html#transport-configuration
