@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 
 class ProductFormDTO
 {
-    private int $id;
+    private ?int $id;
 
     #[Assert\NotBlank]
     #[Assert\Length(max: 50)]
@@ -25,9 +25,7 @@ class ProductFormDTO
     #[Assert\Type('float')]
     private float $price;
 
-    #[Assert\NotBlank]
-    #[Assert\Type('string')]
-    private string $image;
+    private ?string $image = null;
 
     public static function fromEntity(Product $product): self
     {
@@ -39,12 +37,12 @@ class ProductFormDTO
             ->setImage($product->getImage());
     }
 
-    public function getId(): int
+    public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function setId(int $id): self
+    public function setId(?int $id): self
     {
         $this->id = $id;
 

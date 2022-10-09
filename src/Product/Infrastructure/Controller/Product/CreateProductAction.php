@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Product\Infrastructure\Controller\Product;
 
 use App\Product\Application\Command\Product\CreateProductCommand;
-use App\Product\Application\DTO\ProductDTO;
 use App\Product\Application\DTO\ProductFormDTO;
 use App\Product\Infrastructure\Form\ProductType;
 use App\Core\Application\Command\CommandBusInterface;
@@ -22,30 +21,30 @@ class CreateProductAction extends AbstractController
         Request $request,
         CommandBusInterface $commandBus,
     ): Response {
-        $productFromDTO = new ProductFormDTO();
-        $form = $this->createForm(ProductType::class, $productFromDTO, []);
+        $productFormDTO = new ProductFormDTO();
+        $form = $this->createForm(ProductType::class, $productFormDTO, []);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $command = new CreateProductCommand(
-                $productFromDTO->getName(),
-                $productFromDTO->getDescription(),
-                $productFromDTO->getPrice(),
-                $productFromDTO->getImage()
+                $productFormDTO->getName(),
+                $productFormDTO->getDescription(),
+                $productFormDTO->getPrice(),
+                $productFormDTO->getImage()
             );
 
             $productId = $commandBus->execute($command);
 
             $this->addFlash(
                 BootstrapType::BOOTSTRAP_TYPE_SUCCESS,
-                "Продукт {$productFromDTO->getName()} сохранен"
+                "Продукт {$productFormDTO->getName()} сохранен"
             );
 
             return $this->redirectToRoute('list_product', [], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('product/create_product.html.twig', [
-            'product' => $productFromDTO,
+            'product' => $productFormDTO,
             'form' => $form,
         ]);
     }
