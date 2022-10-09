@@ -4,8 +4,10 @@ declare(strict_types=1);
 
 namespace App\Tests\Resource\Fixture;
 
+use App\Tests\Tools\FakerTool;
+use App\User\Domain\Entity\User;
 use Doctrine\Persistence\ObjectManager;
-use App\Tests\Resource\Fixture;
+use Doctrine\Bundle\FixturesBundle\Fixture;
 
 class UserFixture extends Fixture
 {
