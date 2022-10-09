@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ product.name }}{% endblock %}
+
+{% block body %}
+    {# @var product \App\Product\Application\DTO\ProductDTO #}
+
+    <div class="row">
+        <div class="col-12">
+            <h4>
+                {{ product.name }}
+                <small class="text-muted ms-2" style="font-size: 1rem">{{ product.name }}</small>
+                <a href="{{ path('edit_product', {'id': product.id}) }}" class="btn btn-sm btn-primary" role="button"><i class="fas fa-edit"></i></a>
+            </h4>
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-lg-3 mb-3">
+            <img src="/images/{{ product.image }}" class="img-fluid" alt="{{ product.name }} - {{ product.description }}">
+        </div>
+
+        <div class="col-sm-6 col-md-6 col-lg-4 mb-3">
+            <div class="product w-100 h-100">
+                <div class="product-body">
+                    <table class="table table-sm">
+                        <tbody>
+                        <tr>
+                            <th>Описание</th>
+                            <td>{{ product.description }}</td>
+                        </tr>
+                        <tr>
+                            <th>Номер</th>
+                            <td>{{ product.number }}</td>
+                        </tr>
+                        <tr>
+                            <th>Стоимость</th>
+                            <td>{{ product.cost }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-sm-12 col-lg-5 mb-3">
+            <div class="product w-100 h-100">
+                <div class="product-body">
+                    <h4 class="product-title">Часто задаваемые вопросы</h4>
+                    {% for question in product.questions %}
+                        <p>
+                            <strong>{{ question.question }}</strong>
+                        </p>
+                        <p>{{ question.question }}</p>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

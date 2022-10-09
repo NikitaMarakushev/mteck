@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Все продукты{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col">
+            <h4>Все продукты</h4>
+
+            <table id="" class="table table-responsive-md">
+                <thead>
+                <tr>
+                    <th></th>
+                    <th>Название</th>
+                    <th><i class="fas fa-image"></i></th>
+                    <th>Описание</th>
+                    <th><i class="fas fa-hashtag"></i></th>
+                    <th>Цена</th>
+                    <th><i class="fas fa-hashtag"></i></th>
+                    <th>Изображение</th>
+                    <th><i class="fas fa-hashtag"></i></th>
+                </tr>
+                </thead>
+                <tbody class="table-group-divider">
+                {% for product in products %}
+                    <tr>
+                        {# @var product \App\Product\Application\DTO\ProductDTO #}
+                        <td>
+                            <a href="{{ path('edit_product', {'id': product.id}) }}" class="btn btn-sm btn-primary" role="button"><i class="fas fa-edit"></i></a>
+                        </td>
+                        <td><a href="{{ path('show_product', {'id': product.id}) }}">{{ product.name }}</a></td>
+                        <td>
+                            <img src="/images/{{ product.image }}"
+                                 class="img-fluid sm-preview"
+                                 alt="{{ product.name }}"
+                                 data-bs-toggle="popover"
+                                 data-bs-custom-class="custom-popover"
+                                 data-bs-content="<img src='images/{{ product.image }}' class='lg-preview'>"
+                            >
+                        </td>
+                        <td>{{ product.description }}</td>
+                        <td>{{ product.cost }}</td>
+                    </tr>
+                {% else %}
+                    <tr>
+                        <td colspan="3">Нет записей</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+            <a href="{{ path('create_product') }}" class="btn btn-sm btn-primary" role="button">
+                <i class="fas fa-plus-square"></i> Добавить
+            </a>
+        </div>
+    </div>
+
+{% endblock %}

@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    {{ include('_add/_select2-css.html.twig') }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    {{ include('_add/_select2-js.html.twig') }}
+{% endblock %}
+
+{% block title %}Редактировать продукт{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-xl-10 offset-xl-1 col-xxl-8 offset-xxl-2">
+            <h4>Редактировать продукт</h4>
+            <hr>
+
+            {{ include('product/_product_form.html.twig', {'button_label': 'Обновить'}) }}
+
+            <a href="{{ path('list_product') }}" class="btn btn-sm btn-secondary"><i class="fas fa-arrow-left"></i> К списку</a>
+
+            {{ include('product/_product_delete_form.html.twig', { button_text: ' Удалить'}) }}
+        </div>
+    </div>
+
+{% endblock %}
