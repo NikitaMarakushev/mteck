@@ -11,7 +11,6 @@ use Doctrine\Common\DataFixtures\DependentFixtureInterface;
 use Doctrine\Persistence\ObjectManager;
 use Generator;
 
-
 class ProductFixture extends Fixture implements DependentFixtureInterface
 {
     use FakerTool;
