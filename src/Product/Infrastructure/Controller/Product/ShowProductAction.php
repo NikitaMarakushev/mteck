@@ -18,8 +18,8 @@ class ShowProductAction extends AbstractController
         $query = new GetProductQuery($id);
         $productDTO = $queryBus->execute($query);
 
-        return $this->render('card/show_product.html.twig', [
-            'card' => $productDTO,
+        return $this->render('product/show_product.html.twig', [
+            'product' => $productDTO,
         ]);
     }
 }

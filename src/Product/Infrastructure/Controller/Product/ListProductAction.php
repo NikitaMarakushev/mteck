@@ -18,7 +18,7 @@ class ListProductAction extends AbstractController
         $query = new GetAllProductsQuery();
         $productDTOs = $queryBus->execute($query);
 
-        return $this->render('card/list_product.html.twig', [
+        return $this->render('product/list_product.html.twig', [
             'products' => $productDTOs,
         ]);
     }
