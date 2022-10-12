@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Products\Application\Command\Product;
 
-use App\Product\Application\Command\Product\CreateCustomerCommand;
+use App\Product\Application\Command\Product\CreateProductCommand;
 use App\Product\Domain\Repository\ProductRepositoryInterface;
 use App\Core\Application\Command\CommandBusInterface;
 use App\Tests\Tools\FakerTool;
@@ -27,7 +27,7 @@ class CreateProductCommandHandlerTest extends WebTestCase
 
     public function testProductCreatedSuccessfully(): void
     {
-        $command = new CreateCustomerCommand(
+        $command = new CreateProductCommand(
             $this->getFaker()->name(),
             $this->getFaker()->realText(),
             $this->getFaker()->numberBetween(1, 9),

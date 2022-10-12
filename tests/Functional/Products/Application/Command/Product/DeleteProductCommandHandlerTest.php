@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Products\Application\Command\Product;
 
-use App\Product\Application\Command\Product\DeleteCustomerCommand;
+use App\Product\Application\Command\Product\DeleteProductCommand;
 use App\Product\Domain\Repository\ProductRepositoryInterface;
 use App\Core\Application\Command\CommandBusInterface;
 use App\Tests\Resource\Fixture\ProductFixture;
@@ -30,7 +30,7 @@ class DeleteProductCommandHandlerTest extends WebTestCase
         $id = $product->getId();
         $this->entityManager->clear();
 
-        $command = new DeleteCustomerCommand($id);
+        $command = new DeleteProductCommand($id);
         $this->commandBus->execute($command);
 
         $deletedProduct = $this->productRepository->find($id);

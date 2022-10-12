@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Products\Application\Command\Product;
 
-use App\Product\Application\Command\Product\EditCustomerCommand;
+use App\Product\Application\Command\Product\EditProductCommand;
 use App\Product\Domain\Repository\ProductRepositoryInterface;
 use App\Core\Application\Command\CommandBusInterface;
 use App\Tests\Resource\Fixture\ProductFixture;
@@ -36,7 +36,7 @@ class EditProductCommandHandlerTest extends WebTestCase
         $price = $this->getFaker()->numberBetween(1, 9);
         $image = $this->getFaker()->realText();
 
-        $command = new EditCustomerCommand(
+        $command = new EditProductCommand(
             $product->getId(),
             $name,
             $description,

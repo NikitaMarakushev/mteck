@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace App\Tests\Functional\Products\Application\Command\Product;
 
-use App\Product\Application\Command\Product\GetAllCustomersQuery;
 use App\Core\Application\Query\QueryBusInterface;
+use App\Product\Application\Command\Product\GetAllProductsQuery;
 use App\Tests\Resource\Fixture\ProductFixture;
 use Doctrine\ORM\EntityManagerInterface;
 use Liip\TestFixturesBundle\Services\DatabaseToolCollection;
@@ -28,7 +28,7 @@ class GetAllProductsQueryHandlerTest extends WebTestCase
         $name = $product->getName();
         $this->entityManager->clear();
 
-        $command = new GetAllCustomersQuery();
+        $command = new GetAllProductsQuery();
         $productDTOs = $this->queryBus->execute($command);
         $names = array_map(static function ($item) {
             return $item->getName();
