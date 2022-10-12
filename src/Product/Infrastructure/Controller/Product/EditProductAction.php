@@ -6,7 +6,7 @@ namespace App\Product\Infrastructure\Controller\Product;
 
 use App\Core\Application\Command\CommandBusInterface;
 use App\Core\Infrastructure\Tools\BootstrapType;
-use App\Product\Application\Command\Product\EditProductCommand;
+use App\Product\Application\Command\Product\EditCustomerCommand;
 use App\Product\Application\DTO\ProductFormDTO;
 use App\Product\Domain\Repository\ProductRepositoryInterface;
 use App\Product\Infrastructure\Form\ProductType;
@@ -28,7 +28,7 @@ class EditProductAction extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $command = new EditProductCommand(
+            $command = new EditCustomerCommand(
                 $productFormDTO->getId(),
                 $productFormDTO->getName(),
                 $productFormDTO->getDescription(),

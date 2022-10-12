@@ -4,7 +4,7 @@ declare(strict_types=1);
 
 namespace App\Product\Infrastructure\Controller\Product;
 
-use App\Product\Application\Command\Product\CreateProductCommand;
+use App\Product\Application\Command\Product\CreateCustomerCommand;
 use App\Product\Application\DTO\ProductFormDTO;
 use App\Product\Infrastructure\Form\ProductType;
 use App\Core\Application\Command\CommandBusInterface;
@@ -26,7 +26,7 @@ class CreateProductAction extends AbstractController
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
-            $command = new CreateProductCommand(
+            $command = new CreateCustomerCommand(
                 $productFormDTO->getName(),
                 $productFormDTO->getDescription(),
                 $productFormDTO->getPrice(),

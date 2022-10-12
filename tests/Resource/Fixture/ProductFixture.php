@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace App\Tests\Resource\Fixture;
 
-use App\Cards\Domain\Entity\Card;
 use App\Product\Domain\Entity\Product;
 use App\Tests\Tools\FakerTool;
 use Doctrine\Bundle\FixturesBundle\Fixture;

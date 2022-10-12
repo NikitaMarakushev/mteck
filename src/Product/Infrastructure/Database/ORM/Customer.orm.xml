@@ -1,0 +1,17 @@
+<doctrine-mapping xmlns="https://doctrine-project.org/schemas/orm/doctrine-mapping"
+                  xmlns:xsi="https://www.w3.org/2001/XMLSchema-instance"
+                  xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
+                          https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
+
+    <entity name="App\Product\Domain\Entity\Customer" table="customer" schema="public">
+
+        <id name="id" type="integer" column="id">
+            <generator strategy="AUTO"/>
+            <sequence-generator sequence-name="customer_seq" initial-value="1" />
+        </id>
+
+        <field name="name" column="name" type="text" nullable="false" unique="true" />
+        <field name="surname" column="surname" type="text" nullable="false" unique="true" />
+
+    </entity>
+</doctrine-mapping>

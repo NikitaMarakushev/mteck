@@ -6,7 +6,7 @@ namespace App\Product\Infrastructure\Controller\Product;
 
 use App\Core\Application\Command\CommandBusInterface;
 use App\Core\Infrastructure\Tools\BootstrapType;
-use App\Product\Application\Command\Product\DeleteProductCommand;
+use App\Product\Application\Command\Product\DeleteCustomerCommand;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +18,7 @@ class DeleteProductAction extends AbstractController
     public function __invoke(Request $request, int $id, CommandBusInterface $commandBus): Response
     {
         if ($this->isCsrfTokenValid('delete'.$id, $request->request->get('_token'))) {
-            $command = new DeleteProductCommand($id);
+            $command = new DeleteCustomerCommand($id);
             $commandBus->execute($command);
 
             $this->addFlash(
