@@ -3,7 +3,7 @@
                   xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="App\Users\Domain\Entity\User" table="products_user" schema="public">
+    <entity name="App\Users\Domain\Entity\User" table="cards_user" schema="public">
 
         <id name="id" type="integer" column="id">
             <generator strategy="AUTO"/>

@@ -2,10 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\User\Domain\Entity;
+namespace App\Users\Domain\Entity;
 
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 #[UniqueEntity('email', 'Аккаунт с таким email-ом уже зарегистрирован')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface

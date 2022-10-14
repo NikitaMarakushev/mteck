@@ -13,7 +13,7 @@ doctrine:
             Users:
                 is_bundle: false
                 type: xml
-                dir: '%kernel.project_dir%/src/User/Infrastructure/Database/ORM'
+                dir: '%kernel.project_dir%/src/Users/Infrastructure/Database/ORM'
                 prefix: 'App\User\Domain\Entity'
                 alias: Users
             Product:
