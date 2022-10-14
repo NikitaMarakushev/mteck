@@ -1,3 +1,3 @@
-ARG POSTGRES_VERSION=14.5
+FROM postgres:14.5-bullseye
 
-FROM postgres:${POSTGRES_VERSION}-bullseye
+COPY docker/postgres/init.sql /docker-entrypoint-initdb.d/

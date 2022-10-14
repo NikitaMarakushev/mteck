@@ -5,7 +5,6 @@ declare(strict_types=1);
 namespace App\Product\Infrastructure\Form;
 
 use Symfony\Component\Form\AbstractType;
-use Doctrine\DBAL\Types\FloatType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -22,7 +21,7 @@ class ProductType extends AbstractType
                 'label' => 'Описание',
                 'attr' => ['class' => 'form-control-sm'],
             ])
-            ->add('price', FloatType::class, [
+            ->add('price', TextType::class, [
                 'label' => 'Цена',
                 'attr' => ['class' => 'form-control-sm'],
             ])

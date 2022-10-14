@@ -11,9 +11,9 @@
         </id>
 
         <field name="name" column="name" type="text" nullable="false" unique="true" />
-        <field name="description" column="description" type="text" nullable="false" unique="true" />
-        <field name="price" column="price" type="float" nullable="false" unique="true" />
-        <field name="image" column="image" type="text" nullable="false" unique="true" />
+        <field name="description" column="description" type="text" nullable="false" />
+        <field name="price" column="price" type="float" nullable="false" />
+        <field name="image" column="image" type="text" nullable="false" />
 
     </entity>
 </doctrine-mapping>
