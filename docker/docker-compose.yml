@@ -59,6 +59,14 @@ services:
     networks:
       - mteck-network
 
+  memcached:
+    container_name: memcached
+    image: memcached:1.6.13
+    ports:
+      - "11222:11211"
+    networks:
+      - mteck-network
+
 networks:
   mteck-network:
     name: mteck-network
