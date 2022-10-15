@@ -6,6 +6,7 @@ namespace App\Product\Infrastructure\Controller;
 
 use App\Product\Application\DTO\ProductDTO;
 use App\Product\Domain\Repository\ProductRepositoryInterface;
+use http\Exception\InvalidArgumentException;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,9 +19,13 @@ class SearchAction extends AbstractController
     {
         $data = $request->get('qs');
 
+        if (!isset($data)) {
+            throw new InvalidArgumentException('Пустой запрос');
+        }
+
         $products = $productRepository->createQueryBuilder('c')
             ->where('LOWER(c.name) LIKE :data')
-            ->setParameter('data', '%'.mb_strtolower($data).'%')
+            ->setParameter('data', '%' . mb_strtolower($data) . '%')
             ->orderBy('c.name', 'ASC')
             ->getQuery()->getResult();
 
@@ -33,7 +38,7 @@ class SearchAction extends AbstractController
             $productDTOs[] = (new ProductDTO())::fromEntity($product);
         }
 
-        return $this->renderForm('product/search_products.html.twig', [
+        return $this->renderForm('product/search_product.html.twig', [
             'products' => $productDTOs,
         ]);
     }
