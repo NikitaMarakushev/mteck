@@ -1,8 +1,51 @@
 version: '3.7'
 
 services:
+#  pgAdmin:
+#    restart: always
+#    image: dpage/pgadmin4
+#    ports:
+#      - "5000:80"
+#    environment:
+#      PGADMIN_DEFAULT_EMAIL: ${PGADMIN_EMAIL}
+#      PGADMIN_DEFAULT_PASSWORD: ${PGADMIN_PASSWORD}
+#    depends_on:
+#      - postgres
+#    networks:
+#      - mteck-network
+
+  postgres:
+    container_name: postgres
+    image: postgres:14.5-alpine
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB}
+      POSTGRES_USER: ${POSTGRES_USER}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+    ports:
+      - "5001:5432"
+    volumes:
+      - mteck_data:/var/lib/postgresql/data:rw
+    networks:
+      - mteck-network
+
+  php:
+    container_name: php
+    environment:
+      - APP_ENV=${APP_ENV}
+      - APP_SECRET=${APP_SECRET}
+    build:
+      context: php
+    volumes:
+      - ..:/srv
+      - ./php/conf.d/app.ini:/usr/local/etc/php/conf.d/zz-overrides.ini
+      - $HOME/.composer/cache:/home/dev/.composer/cache
+    depends_on:
+      - postgres
+    networks:
+      - mteck-network
+
   nginx:
-    container_name: "${WEBSERVER_CONTAINER_NAME}"
+    container_name: nginx
     image: nginx:1.21.6
     volumes:
       - ../:/srv
@@ -10,57 +53,16 @@ services:
     depends_on:
       - php
     ports:
-      - "8080:80"
+      - "8081:80"
     links:
       - php
     networks:
       - mteck-network
 
-  php:
-    container_name: "${APPLICATION_CONTAINER_NAME}"
-    build:
-      context: ..
-      dockerfile: docker/php/Dockerfile
-      target: app_php
-      args:
-        SYMFONY_VERSION: ${SYMFONY_VERSION:-}
-        STABILITY: ${STABILITY:-stable}
-    volumes:
-      - ..:/srv
-      - ./php/conf.d/app.ini:/usr/local/etc/php/conf.d/zz-overrides.ini
-      - $HOME/.composer/cache:/home/dev/.composer/cache
-    healthcheck:
-      interval: 10s
-      timeout: 3s
-      retries: 3
-      start_period: 30s
-    networks:
-      - mteck-network
-    depends_on:
-      - postgres
-
-  postgres:
-    container_name: "${DATABASE_CONTAINER_NAME}"
-    build:
-      context: ..
-      dockerfile: docker/postgres/Dockerfile
-    environment:
-      - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-      - POSTGRES_DB_PASSWORD=$POSTGRES_DB_PASSWORD
-      - POSTGRES_DB_NAME=$POSTGRES_DB_NAME
-      - POSTGRES_USER_NAME=$POSTGRES_USER_NAME
-      - POSTGRES_USER_PASSWORD=$POSTGRES_USER_PASSWORD
-    volumes:
-      - mteck:/var/lib/postgresql/data:rw
-    ports:
-      - "5432:5432"
-    networks:
-      - mteck-network
-
-volumes:
-  mteck:
-    name: mteck_database_data
-
 networks:
   mteck-network:
     name: mteck-network
+
+volumes:
+  mteck_data:
+    name: mteck_data
