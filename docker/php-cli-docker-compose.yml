@@ -1,0 +1,23 @@
+version: "3.7"
+
+networks:
+  mteck-network:
+    name: mteck-network
+
+services:
+  php-cli:
+    container_name: php-cli
+    environment:
+      - APP_ENV=${APP_ENV}
+      - APP_SECRET=${APP_SECRET}
+    build:
+      context: php
+    env_file:
+      - .env
+    working_dir: /srv
+    volumes:
+      - ..:/srv
+      - ./php/php-ini-overrides.ini:/usr/local/etc/php/conf.d/zz-overrides.ini
+      - $HOME/.composer/cache:/home/dev/.composer/cache
+    networks:
+      - mteck-network
