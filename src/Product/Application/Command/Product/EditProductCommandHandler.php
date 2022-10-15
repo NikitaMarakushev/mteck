@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Product\Application\Command\Product;
 
 use App\Product\Domain\Repository\ProductRepositoryInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+#[AsMessageHandler]
 class EditProductCommandHandler
 {
     public function __construct(private readonly ProductRepositoryInterface $productRepository)

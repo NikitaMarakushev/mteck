@@ -7,7 +7,9 @@ namespace App\Product\Application\Command\Product;
 use App\Core\Application\Command\CommandHandlerInterface;
 use App\Product\Domain\Entity\Product;
 use App\Product\Domain\Repository\ProductRepositoryInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+#[AsMessageHandler]
 class CreateProductCommandHandler implements CommandHandlerInterface
 {
     public function __construct(private readonly ProductRepositoryInterface $productRepository)

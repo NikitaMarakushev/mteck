@@ -7,7 +7,9 @@ namespace App\Product\Application\Command\Customer;
 use App\Core\Application\Query\QueryHandlerInterface;
 use App\Product\Application\DTO\CustomerDTO;
 use App\Product\Domain\Repository\CustomerRepositoryInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+#[AsMessageHandler]
 class GetAllCustomersQueryHandler implements QueryHandlerInterface
 {
     public function __construct(private readonly CustomerRepositoryInterface $customerRepository)

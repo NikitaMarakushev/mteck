@@ -25,7 +25,7 @@ class SearchAction extends AbstractController
             ->getQuery()->getResult();
 
         if (1 === \count($products)) {
-            return $this->redirectToRoute('show_card', ['id' => $products[0]->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('show_product', ['id' => $products[0]->getId()], Response::HTTP_SEE_OTHER);
         }
 
         $productDTOs = [];

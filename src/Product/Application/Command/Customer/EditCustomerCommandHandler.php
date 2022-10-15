@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Product\Application\Command\Customer;
 
 use App\Product\Domain\Repository\CustomerRepositoryInterface;
+use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
+#[AsMessageHandler]
 class EditCustomerCommandHandler
 {
     public function __construct(private readonly CustomerRepositoryInterface $customerRepository)

@@ -6,11 +6,18 @@ namespace App\Product\Domain\Entity;
 
 class Customer
 {
+    private int $id;
+
+    private string $name;
+
+    private string $surname;
+
     public function __construct(
-        private int $id,
-        private string $name,
-        private string $surname
+         string $name,
+         string $surname
     ) {
+        $this->name = $name;
+        $this->surname = $surname;
     }
 
     public function getId(): int

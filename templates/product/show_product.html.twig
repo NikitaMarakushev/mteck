@@ -31,29 +31,11 @@
                             <td>{{ product.description }}</td>
                         </tr>
                         <tr>
-                            <th>Номер</th>
-                            <td>{{ product.number }}</td>
-                        </tr>
-                        <tr>
                             <th>Стоимость</th>
-                            <td>{{ product.cost }}</td>
+                            <td>{{ product.price }}</td>
                         </tr>
                         </tbody>
                     </table>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-sm-12 col-lg-5 mb-3">
-            <div class="product w-100 h-100">
-                <div class="product-body">
-                    <h4 class="product-title">Часто задаваемые вопросы</h4>
-                    {% for question in product.questions %}
-                        <p>
-                            <strong>{{ question.question }}</strong>
-                        </p>
-                        <p>{{ question.question }}</p>
-                    {% endfor %}
                 </div>
             </div>
         </div>

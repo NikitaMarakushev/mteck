@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/product/{id}/edit', name: 'product_product', methods: ['GET', 'POST'])]
+#[Route('/product/{id}/edit', name: 'edit_product', methods: ['GET', 'POST'])]
 class EditProductAction extends AbstractController
 {
     public function __invoke(
