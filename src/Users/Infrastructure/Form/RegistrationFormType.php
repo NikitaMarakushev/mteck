@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\User\Infrastructure\Form;
+namespace App\Users\Infrastructure\Form;
 
-use App\User\Domain\Entity\User;
+use App\Users\Domain\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;

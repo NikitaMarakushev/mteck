@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\User\Domain\Service;
+namespace App\Users\Domain\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;

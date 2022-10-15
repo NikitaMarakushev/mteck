@@ -24,7 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends git wget sudo u
     && rm -rf /var/lib/apt/lists/* \
 
 
-RUN sudo mv "$PHP_INI_DIR/php.ini-development" "$PHP_INI_DIR/php.ini"
+RUN sudo mv "$PHP_INI_DIR/app.init" "$PHP_INI_DIR/php.ini"
 
 EXPOSE 9000
 

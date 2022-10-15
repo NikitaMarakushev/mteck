@@ -3,4 +3,4 @@ doctrine_migrations:
         # namespace is arbitrary but should be different from App\Migrations
         # as migrations classes should NOT be autoloaded
         'App\Core\Infrastructure\Database\Migrations': '%kernel.project_dir%/src/Core/Infrastructure/Database/Migrations'
-    enable_profiler: false
+    enable_profiler: '%kernel.debug%'

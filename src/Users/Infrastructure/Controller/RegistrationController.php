@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\User\Infrastructure\Controller;
+namespace App\Users\Infrastructure\Controller;
 
-use App\User\Domain\Entity\User;
-use App\User\Domain\Service\EmailVerifier;
-use App\User\Infrastructure\Form\RegistrationFormType;
+use App\Users\Domain\Entity\User;
+use App\Users\Domain\Service\EmailVerifier;
+use App\Users\Infrastructure\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;

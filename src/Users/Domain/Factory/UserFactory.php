@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace App\User\Domain\Factory;
+namespace App\Users\Domain\Factory;
 
-use App\User\Domain\Entity\User;
+use App\Users\Domain\Entity\User;
 
 class UserFactory
 {
