@@ -26,9 +26,7 @@ class ProductFormDTO
     #[Assert\Type('float')]
     private float $price;
 
-    #[Assert\NotBlank]
-    #[Assert\Type('ProductCategory')]
-    private ProductCategory $category;
+    private int $category;
 
     private ?string $image = null;
 
@@ -40,7 +38,7 @@ class ProductFormDTO
             ->setDescription($product->getDescription())
             ->setPrice($product->getPrice())
             ->setImage($product->getImage())
-            ->setCategory($product->getCategory());
+            ->setCategory($product->getCategory()->getId());
     }
 
     public function getId(): ?int
@@ -103,12 +101,12 @@ class ProductFormDTO
         return $this;
     }
 
-    public function getCategory(): ProductCategory
+    public function getCategory(): int
     {
         return $this->category;
     }
 
-    public function setCategory(ProductCategory $category): self
+    public function setCategory(int $category): self
     {
         $this->category = $category;
 

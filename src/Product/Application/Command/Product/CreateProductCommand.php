@@ -14,7 +14,7 @@ class CreateProductCommand implements CommandInterface
         public readonly string $description,
         public readonly float $price,
         public readonly string $image,
-        public readonly ProductCategory $category
+        public readonly int $category
     ) {
     }
 }
