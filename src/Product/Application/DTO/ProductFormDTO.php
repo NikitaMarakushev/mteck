@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Product\Application\DTO;
 
 use App\Product\Domain\Entity\Product;
+use App\Product\Domain\Entity\ProductCategory;
 use App\Product\Infrastructure\Form\ProductType;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -25,6 +26,10 @@ class ProductFormDTO
     #[Assert\Type('float')]
     private float $price;
 
+    #[Assert\NotBlank]
+    #[Assert\Type('ProductCategory')]
+    private ProductCategory $category;
+
     private ?string $image = null;
 
     public static function fromEntity(Product $product): self
@@ -34,7 +39,8 @@ class ProductFormDTO
             ->setName($product->getName())
             ->setDescription($product->getDescription())
             ->setPrice($product->getPrice())
-            ->setImage($product->getImage());
+            ->setImage($product->getImage())
+            ->setCategory($product->getCategory());
     }
 
     public function getId(): ?int
@@ -93,6 +99,18 @@ class ProductFormDTO
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getCategory(): ProductCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(ProductCategory $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

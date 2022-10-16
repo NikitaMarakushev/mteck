@@ -30,7 +30,8 @@ class CreateProductAction extends AbstractController
                 $productFormDTO->getName(),
                 $productFormDTO->getDescription(),
                 $productFormDTO->getPrice(),
-                $productFormDTO->getImage()
+                $productFormDTO->getImage(),
+                $productFormDTO->getCategory()
             );
 
             $productId = $commandBus->execute($command);

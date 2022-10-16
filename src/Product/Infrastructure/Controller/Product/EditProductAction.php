@@ -20,7 +20,8 @@ class EditProductAction extends AbstractController
 {
     public function __invoke(
         Request $request, int $id, CommandBusInterface $commandBus, ProductRepositoryInterface $productRepository
-    ): Response {
+    ): Response
+    {
         $product = $productRepository->find($id);
         $productFormDTO = ProductFormDTO::fromEntity($product);
 
@@ -35,17 +36,20 @@ class EditProductAction extends AbstractController
                 $productFormDTO->getPrice(),
                 $productFormDTO->getImage()
             );
+
+            $productId = $commandBus->execute($command);
+
+            $this->addFlash(
+                BootstrapType::BOOTSTRAP_TYPE_SUCCESS,
+                "Продукт {$productFormDTO->getName()} обновлён"
+            );
+
+            return $this->renderForm('product/edit_product.html.twig', [
+                'product' => $productFormDTO,
+                'form' => $form,
+            ]);
         }
-        $productId = $commandBus->execute($command);
 
-        $this->addFlash(
-            BootstrapType::BOOTSTRAP_TYPE_SUCCESS,
-            "Продукт {$productFormDTO->getName()} обновлён"
-        );
-
-        return $this->renderForm('product/edit_product.html.twig', [
-            'product' => $productFormDTO,
-            'form' => $form,
-        ]);
+        return $this->redirectToRoute('list_product', [], Response::HTTP_SEE_OTHER);
     }
 }

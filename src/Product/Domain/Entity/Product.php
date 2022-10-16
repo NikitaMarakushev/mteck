@@ -84,4 +84,16 @@ class Product
 
         return $this;
     }
+
+    public function getCategory(): ProductCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(ProductCategory $category): self
+    {
+        $this->category = $category;
+
+        return $this;
+    }
 }

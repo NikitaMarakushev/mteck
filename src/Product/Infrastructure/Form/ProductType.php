@@ -29,6 +29,10 @@ class ProductType extends AbstractType
                 'label' => 'Изображение',
                 'attr' => ['class' => 'form-control-sm'],
             ])
+            ->add('category', TextType::class, [
+                'label' => 'Категория',
+                'attr' => ['class' => 'form-control-sm']
+            ])
         ;
     }
 }
