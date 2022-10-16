@@ -3,12 +3,10 @@
                   xsi:schemaLocation="https://doctrine-project.org/schemas/orm/doctrine-mapping
                           https://www.doctrine-project.org/schemas/orm/doctrine-mapping.xsd">
 
-    <entity name="App\Users\Domain\Entity\User" table="cards_user" schema="public">
+    <entity name="App\Users\Domain\Entity\User" table="user" schema="public">
 
         <id name="id" type="integer" column="id">
-            <generator strategy="AUTO"/>
-            <sequence-generator sequence-name="artist_seq" initial-value="1" />
-        </id>
+            <generator strategy="AUTO"/></id>
 
         <field name="name" column="name" type="text" nullable="false" unique="true" />
         <field name="email" column="email" type="text" length="180" nullable="false" unique="true" />
