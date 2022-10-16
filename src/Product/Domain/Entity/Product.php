@@ -16,16 +16,20 @@ class Product
 
     private string $image;
 
+    private ProductCategory $category;
+
     public function __construct(
         string $name,
         string $description,
         float $price,
-        string $image
+        string $image,
+        ProductCategory $category
     ) {
         $this->name = $name;
         $this->description = $description;
         $this->price = $price;
         $this->image = $image;
+        $this->category = $category;
     }
 
     public function getId(): int
