@@ -13,13 +13,9 @@
                 <tr>
                     <th></th>
                     <th>Название</th>
-                    <th><i class="fas fa-image"></i></th>
-                    <th>Описание</th>
-                    <th><i class="fas fa-hashtag"></i></th>
-                    <th>Цена</th>
-                    <th><i class="fas fa-hashtag"></i></th>
                     <th>Изображение</th>
-                    <th><i class="fas fa-hashtag"></i></th>
+                    <th>Описание</th>
+                    <th>Цена</th>
                 </tr>
                 </thead>
                 <tbody class="table-group-divider">
@@ -29,7 +25,7 @@
                         <td>
                             <a href="{{ path('edit_product', {'id': product.id}) }}" class="btn btn-sm btn-primary" role="button"><i class="fas fa-edit"></i></a>
                         </td>
-                        <td><a href="{{ path('show_product', {'id': product.id}) }}">{{ product.name }}</a></td>
+                        <td><a href="{{ path('show_product', {'id': product.id}) }}" style="text-decoration: none; color: black">{{ product.name }}</a></td>
                         <td>
                             <img src="/images/{{ product.image }}"
                                  class="img-fluid sm-preview"

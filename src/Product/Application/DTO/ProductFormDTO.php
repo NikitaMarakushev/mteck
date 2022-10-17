@@ -26,9 +26,9 @@ class ProductFormDTO
     #[Assert\Type('float')]
     private float $price;
 
-    private int $category;
-
     private ?string $image = null;
+
+    private int $category;
 
     public static function fromEntity(Product $product): self
     {

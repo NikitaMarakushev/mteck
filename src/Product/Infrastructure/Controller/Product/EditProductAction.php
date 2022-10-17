@@ -49,12 +49,13 @@ class EditProductAction extends AbstractController
                 "Продукт {$productFormDTO->getName()} обновлён"
             );
 
-            return $this->renderForm('product/edit_product.html.twig', [
-                'product' => $productFormDTO,
-                'form' => $form,
-            ]);
+            return $this->redirectToRoute('list_product', [], Response::HTTP_SEE_OTHER);
+
         }
 
-        return $this->redirectToRoute('list_product', [], Response::HTTP_SEE_OTHER);
+        return $this->renderForm('product/edit_product.html.twig', [
+            'product' => $productFormDTO,
+            'form' => $form,
+        ]);
     }
 }

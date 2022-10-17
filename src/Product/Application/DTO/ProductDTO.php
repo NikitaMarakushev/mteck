@@ -18,14 +18,19 @@ class ProductDTO
 
     private ?string $image = null;
 
+    private ProductCategoryDTO $category;
+
     public static function fromEntity(Product $product): self
     {
+        $category = (new ProductCategoryDTO())::fromEntity($product->getCategory());
+
         return (new self())
             ->setId($product->getId())
             ->setName($product->getName())
             ->setDescription($product->getDescription())
             ->setPrice($product->getPrice())
-            ->setImage($product->getImage());
+            ->setImage($product->getImage())
+            ->setCategory($category);
     }
 
     public function __toString()
@@ -89,6 +94,18 @@ class ProductDTO
     public function setImage(?string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getCategory(): ProductCategoryDTO
+    {
+        return $this->category;
+    }
+
+    public function setCategory(ProductCategoryDTO $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

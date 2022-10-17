@@ -35,9 +35,7 @@ class ProductType extends AbstractType
             ->add('category', ChoiceType::class, [
                 'label' => 'Категория',
                 'choices' => $options['categories_choices'],
-                'expanded' => false,
-                'multiple' => true,
-                'attr' => ['class' => 'form-select-sm multiple-pillow', 'size' => '4'],
+                'attr' => ['class' => 'form-select-sm'],
             ]);
     }
 
