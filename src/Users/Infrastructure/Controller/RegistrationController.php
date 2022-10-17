@@ -6,6 +6,7 @@ namespace App\Users\Infrastructure\Controller;
 
 use App\Users\Domain\Entity\User;
 use App\Users\Domain\Service\EmailVerifier;
+use App\Users\Infrastructure\Form\LoginFormType;
 use App\Users\Infrastructure\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -15,6 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 
 class RegistrationController extends AbstractController
@@ -44,19 +46,42 @@ class RegistrationController extends AbstractController
             $entityManager->persist($user);
             $entityManager->flush();
 
-            $this->emailVerifier->sendEmailConfirmation('app_verify_email', $user,
-                (new TemplatedEmail())
-                    ->from(new Address('nikitamarakushev@yandex.ru', 'mteck No-Reply'))
-                    ->to($user->getEmail())
-                    ->subject('Please Confirm your Email')
-                    ->htmlTemplate('user/confirmation_email.html.twig')
-            );
-
             return $this->redirectToRoute('home');
         }
 
         return $this->render('user/register.html.twig', [
             'registrationForm' => $form->createView()
+        ]);
+    }
+
+    //@todo доделать логин
+    #[Route('/login', name: 'login')]
+    public function login(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    {
+        $data = $request->get('email');
+
+        $user = $entityManager->createQueryBuilder('u')
+            ->where('LOWER(u.email) LIKE :data')
+            ->setParameter('data', '%' . mb_strtolower($data) . '%')
+            ->orderBy('c.name', 'ASC')
+            ->getQuery()->getResult();
+
+        if (!$user) {
+            return $this->redirectToRoute('home');
+        }
+
+
+        $user = new User();
+        $form = $this->createForm(LoginFormType::class, $user);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+
+            return $this->redirectToRoute('home');
+        }
+
+        return $this->render('user/login.html.twig', [
+            'loginForm' => $form->createView()
         ]);
     }
 

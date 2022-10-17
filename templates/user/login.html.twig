@@ -1,0 +1,27 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Login{% endblock %}
+
+{% block body %}
+
+    <div class="row">
+        <div class="col-md-10 offset-md-1 col-lg-8 offset-lg-2 col-xl-6 offset-xl-3 col-xxl-4 offset-xxl-4">
+            {% for flashError in app.flashes('verify_email_error') %}
+                <div class="alert alert-danger" role="alert">{{ flashError }}</div>
+            {% endfor %}
+
+            <h4>Вход</h4>
+
+            {{ form_start(loginForm, {'attr': {'class': 'row', 'id': 'login'}}) }}
+            <div class="col-12">
+                {{ form_row(loginForm.email) }}
+            </div>
+            <div class="col-12">
+                {{ form_row(loginForm.password) }}
+            </div>
+            {{ form_end(loginForm) }}
+            <button form="registration" name="save-button" class="btn btn-sm btn-primary">Войти</button>
+        </div>
+    </div>
+
+{% endblock %}
