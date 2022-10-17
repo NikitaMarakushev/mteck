@@ -22,7 +22,8 @@ class CreateProductCommandHandler implements CommandHandlerInterface
             $command->name,
             $command->description,
             $command->price,
-            $command->image
+            $command->image,
+            $command->category
         );
 
         $this->productRepository->add($product);

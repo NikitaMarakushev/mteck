@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace App\Product\Application\Command\ProductCategory;
 
+use App\Core\Application\Command\CommandHandlerInterface;
 use App\Product\Application\DTO\ProductCategoryDTO;
 use App\Product\Domain\Repository\ProductCategoryRepositoryInterface;
 use Symfony\Component\Messenger\Attribute\AsMessageHandler;
 
 #[AsMessageHandler]
-class GetAllProductCategoriesQueryHandler
+class GetAllProductCategoriesQueryHandler  implements CommandHandlerInterface
 {
     public function __construct(private readonly ProductCategoryRepositoryInterface $productCategoryRepository)
     {
