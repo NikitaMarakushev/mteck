@@ -22,26 +22,17 @@ class LoginFormType extends AbstractType
     {
         $builder
             ->add('email', TextType::class)
-            ->add('password', RepeatedType::class, [
-                'type' => PasswordType::class,
-                'mapped' => false,
-                'required' => true,
-                'invalid_message' => 'Пароли должны совпадать.',
-                'first_options' => [
-                    'label' => 'Пароль',
-                    'attr' => ['autocomplete' => 'new-password'],
+            ->add('password', PasswordType::class, [
                     'constraints' => [
-                        new NotBlank([
-                            'message' => 'Введите пароль',
-                        ]),
-                        new Length([
-                            'min' => 6,
-                            'minMessage' => 'Длина пароля должна быть как минимум {{ limit }} символов',
-                            'max' => 4096,
-                        ]),
-                    ],
+                    new NotBlank([
+                        'message' => 'Введите пароль',
+                    ]),
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'Длина пароля должна быть как минимум {{ limit }} символов',
+                        'max' => 4096,
+                    ]),
                 ],
-                'second_options' => ['label' => 'Пароль еще раз'],
             ]);
     }
 

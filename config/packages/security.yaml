@@ -17,18 +17,19 @@ security:
     main:
       lazy: true
       provider: app_user_provider
+      form_login:
+        default_target_path: home
 
       # activate different ways to authenticate
       # https://symfony.com/doc/current/security.html#firewalls-authentication
 
       # https://symfony.com/doc/current/security/impersonating_user.html
       # switch_user: true
+    # - { path: ^/admin, roles: ROLE_ADMIN }
+    # - { path: ^/profile, roles: ROLE_USER }
 
   # Easy way to control access for large sections of your sites
   # Note: Only the *first* access control that matches will be used
-  access_control:
-  # - { path: ^/admin, roles: ROLE_ADMIN }
-  # - { path: ^/profile, roles: ROLE_USER }
 
 when@test:
   security:

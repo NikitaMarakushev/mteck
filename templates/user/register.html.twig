@@ -26,7 +26,8 @@
             {{ form_row(registrationForm.agreeTerms) }}
         </div>
         {{ form_end(registrationForm) }}
-        <button form="registration" name="save-button" class="btn btn-sm btn-primary">Зарегистрироваться</button>
+        <button form="registration" name="save-button" class="btn btn-sm btn-danger">Зарегистрироваться</button>
+        <a href="{{ path('app_login') }}" class="btn btn-sm btn-primary">Войти</a>
     </div>
 </div>
 

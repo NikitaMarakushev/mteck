@@ -9,11 +9,13 @@ use App\Users\Domain\Service\EmailVerifier;
 use App\Users\Infrastructure\Form\LoginFormType;
 use App\Users\Infrastructure\Form\RegistrationFormType;
 use Doctrine\ORM\EntityManagerInterface;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
@@ -23,13 +25,19 @@ class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
 
-    public function __construct(EmailVerifier $emailVerifier)
+    private UserPasswordHasher $hasher;
+
+    public function __construct(EmailVerifier $emailVerifier, UserPasswordHasher $hasher)
     {
         $this->emailVerifier = $emailVerifier;
+        $this->hasher = $hasher;
     }
 
     #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    public function register(
+        Request $request,
+        UserPasswordHasherInterface $userPasswordHasher,
+        EntityManagerInterface $entityManager): Response
     {
         $user = new User();
         $form = $this->createForm(RegistrationFormType::class, $user);
@@ -54,34 +62,25 @@ class RegistrationController extends AbstractController
         ]);
     }
 
-    //@todo доделать логин
-    #[Route('/login', name: 'login')]
-    public function login(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    #[Route('/login', name: 'app_login')]
+#    #[Template('user/login.html.twig')]
+    public function login(Request $request, AuthenticationUtils $authUtils)
     {
-        $data = $request->get('email');
-
-        $user = $entityManager->createQueryBuilder('u')
-            ->where('LOWER(u.email) LIKE :data')
-            ->setParameter('data', '%' . mb_strtolower($data) . '%')
-            ->orderBy('c.name', 'ASC')
-            ->getQuery()->getResult();
-
-        if (!$user) {
-            return $this->redirectToRoute('home');
-        }
-
-
         $user = new User();
         $form = $this->createForm(LoginFormType::class, $user);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
+        $error = $authUtils->getLastAuthenticationError();
+        if ($form->isSubmitted()) {
+            $email = $request->get('email');
+            $password = $request->get('password');
+            die(var_export([$email, $password]));
+            $this->hasher->isPasswordValid($user, $password);
 
             return $this->redirectToRoute('home');
         }
 
         return $this->render('user/login.html.twig', [
-            'loginForm' => $form->createView()
+            'loginForm' => $form->createView(),
+            'error' => $error
         ]);
     }
 
