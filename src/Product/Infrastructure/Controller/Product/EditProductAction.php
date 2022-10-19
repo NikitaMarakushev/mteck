@@ -23,13 +23,13 @@ class EditProductAction extends AbstractController
         Request $request, int $id,
         CommandBusInterface $commandBus,
         ProductRepositoryInterface $productRepository,
-        ProductCategoryChoiceHelper $productCategoryChoiseHelper
+        ProductCategoryChoiceHelper $productCategoryChoiceHelper
     ): Response {
         $product = $productRepository->find($id);
         $productFormDTO = ProductFormDTO::fromEntity($product);
 
         $form = $this->createForm(ProductType::class, $productFormDTO, [
-            'categories_choices' => $productCategoryChoiseHelper->getChoices()
+            'categories_choices' => $productCategoryChoiceHelper->getChoices()
         ]);
         $form->handleRequest($request);
 
@@ -42,7 +42,7 @@ class EditProductAction extends AbstractController
                 $productFormDTO->getImage()
             );
 
-            $productId = $commandBus->execute($command);
+            $commandBus->execute($command);
 
             $this->addFlash(
                 BootstrapType::BOOTSTRAP_TYPE_SUCCESS,

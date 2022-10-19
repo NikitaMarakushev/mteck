@@ -6,6 +6,7 @@ namespace App\Product\Infrastructure\Controller\Product;
 
 use App\Product\Application\Command\Product\CreateProductCommand;
 use App\Product\Application\DTO\ProductFormDTO;
+use App\Product\Domain\Service\ProductCategoryChoiceHelper;
 use App\Product\Infrastructure\Form\ProductType;
 use App\Core\Application\Command\CommandBusInterface;
 use App\Core\Infrastructure\Tools\BootstrapType;
@@ -20,9 +21,15 @@ class CreateProductAction extends AbstractController
     public function __invoke(
         Request $request,
         CommandBusInterface $commandBus,
+        ProductCategoryChoiceHelper $productCategoryChoiceHelper
     ): Response {
         $productFormDTO = new ProductFormDTO();
         $form = $this->createForm(ProductType::class, $productFormDTO, []);
+
+        $form = $this->createForm(ProductType::class, $productFormDTO, [
+            'categories_choices' => $productCategoryChoiceHelper->getChoices()
+        ]);
+
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
@@ -34,7 +41,7 @@ class CreateProductAction extends AbstractController
                 $productFormDTO->getCategory()
             );
 
-            $productId = $commandBus->execute($command);
+            $commandBus->execute($command);
 
             $this->addFlash(
                 BootstrapType::BOOTSTRAP_TYPE_SUCCESS,
