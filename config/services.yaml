@@ -39,5 +39,3 @@ services:
     App\Core\Infrastructure\Twig\IconExtension:
         tags: [ 'twig.extension' ]
 
-    Symfony\Component\PasswordHasher\Hasher\UserPasswordHasher:
-        tags: ['password.hasher']

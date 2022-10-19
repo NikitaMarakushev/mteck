@@ -5,7 +5,3 @@ controller_core:
 controller_product:
     resource: ../src/Product/Infrastructure/Controller/
     type: attribute
-
-controller_users:
-    resource: ../src/Users/Infrastructure/Controller/
-    type: attribute
