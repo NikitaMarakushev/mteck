@@ -2,7 +2,7 @@
 
 ![This is an image](public/images/mteck.png)
 
-E-commerce based on CQRS
+CRUD for using with Simple Product based on CQRS Architecture
 
 1) Clone the project
 
